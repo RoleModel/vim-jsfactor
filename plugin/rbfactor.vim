@@ -14,7 +14,12 @@ endfunction
 
 function! ExtractVariable(mode)
   let name = input("Variable name: ", '')
-  let cmd = 'normal! gv"fc' . name . 'Ovar ' . name . ' = '
+  if &filetype == 'ruby'
+    let cmd = 'normal! gv"fc' . name . 'O' . name . ' = '
+  elseif &filetype == 'javascript'
+    let cmd = 'normal! gv"fc' . name . 'Ovar ' . name . ' = '
+  endif
+
   if a:mode ==# 'v'
     let cmd = cmd  . '"fp'
   elseif a:mode ==# 'V'
