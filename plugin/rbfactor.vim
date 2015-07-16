@@ -13,7 +13,7 @@ function! ConstantFromFilename()
 endfunction
 
 function! ExtractVariable(mode)
-  let name = input("Variable name: ", 'my_var')
+  let name = input("Variable name: ", '')
   let cmd = 'normal! gv"fc' . name . 'O' . name . ' = '
   if a:mode ==# 'v'
     let cmd = cmd  . '"fp'
