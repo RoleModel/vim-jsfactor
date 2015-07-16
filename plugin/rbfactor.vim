@@ -14,7 +14,7 @@ endfunction
 
 function! ExtractVariable(mode)
   let name = input("Variable name: ", '')
-  let cmd = 'normal! gv"fc' . name . 'O' . name . ' = '
+  let cmd = 'normal! gv"fc' . name . 'Ovar ' . name . ' = '
   if a:mode ==# 'v'
     let cmd = cmd  . '"fp'
   elseif a:mode ==# 'V'
