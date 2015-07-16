@@ -14,22 +14,24 @@ endfunction
 
 function! ExtractVariable(mode)
   let name = input("Variable name: ", '')
-  let end_of_line = ''
-  if &filetype == 'ruby'
-    let cmd = 'normal! gv"fc' . name . 'O' . name . ' = '
-  elseif &filetype == 'javascript'
-    let cmd = 'normal! gv"fc' . name . 'Ovar ' . name . ' = '
-    let end_of_line = ';'
-  endif
+  if name != ''
+    let end_of_line = ''
+    if &filetype == 'ruby'
+      let cmd = 'normal! gv"fc' . name . 'O' . name . ' = '
+    elseif &filetype == 'javascript'
+      let cmd = 'normal! gv"fc' . name . 'Ovar ' . name . ' = '
+      let end_of_line = ';'
+    endif
 
-  if a:mode ==# 'v'
-    let cmd = cmd  . '"fp' . end_of_line . ''
-  elseif a:mode ==# 'V'
-    let cmd = cmd . '"fp' . end_of_line . 'kJ'
-    let end_of_line = ';'
+    if a:mode ==# 'v'
+      let cmd = cmd  . '"fp' . end_of_line . ''
+    elseif a:mode ==# 'V'
+      let cmd = cmd . '"fp' . end_of_line . 'kJ'
+      let end_of_line = ';'
+    endif
+    let cmd = cmd . '=='
+    call s:executeAndRestorePosition(cmd)
   endif
-  let cmd = cmd . '=='
-  call s:executeAndRestorePosition(cmd)
 endfunction
 
 function! ExtractConstant(mode)
