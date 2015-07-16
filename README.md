@@ -1,4 +1,4 @@
-# Vim-Refactor – Refactoring Ruby with Vim
+# Vim-Refactor – Refactoring Ruby and JavaScript with Vim
 
 ## Introduction
 
